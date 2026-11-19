@@ -1,5 +1,6 @@
 # Problem-Set-4
-**Model:** Claude ~ Opus 5.5 ; **Date:** 11/18
+# AI Transcript
+**Model: Claude ~ Opus 5.5 ; Date: 11/18 **
 
 ***Prompt:*** [Prep] Act as a machine learning engineer who diagnoses model
 performance problems in production.
@@ -22,7 +23,6 @@ what each implies about whether collecting more data would help.
 features is the higher-return investment.
 
 ***Reply:***
-
 I couldn’t run it on your data because no file was attached to this chat, so X and y don’t exist on my end. I tested the script on made-up data of the same shape (400 rows, 12 predictors) to confirm it runs. If you upload your data file, or paste the printed output, I’ll give you the diagnosis.
 
 What the script does: It fits a linear regression on growing slices of your data (10% up to 100%) with 5-fold cross-validation. It plots the average training error and validation error, with shaded bands showing the spread across folds. Because each fold holds out a fifth of the data, the largest training size is 320 stores, not 400. The gray dashed line shows the error you’d get by just predicting average revenue for every store, which gives you a reference for whether an error is “high”.
@@ -37,7 +37,7 @@ These cutoffs are rules of thumb, not formal tests. The wide shaded bands you’
 
 For example, the test run on fake data showed a gap of only 4% and almost no drop at the last step. The model still removed just 56% of the guess-the-average error. That pattern points to bias, so better features would be the call.
 
-**Code:** import numpy as np
+import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import learning_curve, KFold
@@ -94,4 +94,3 @@ print(f"Gap:                    {gap:.2f}  ({gap / val_mean[-1]:.0%} of validati
 print(f"Validation drop, last step: {still_falling:.2f}")
 print(f"Guess-the-average RMSE: {np.std(y):.2f}")
 print(f"Share of error removed by model: {1 - val_mean[-1] / np.std(y):.0%}")
-
